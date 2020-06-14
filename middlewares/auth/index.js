@@ -2,9 +2,9 @@
 
 const singupValidate = require('./singupValidate')
 const verifyToken = require('./verifyToken') 
-const validators = {
+const middlewares = {
     singupValidate,
     verifyToken
 }
 
-module.exports =  validators
+module.exports = middlewares
