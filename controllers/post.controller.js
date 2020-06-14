@@ -8,11 +8,13 @@ const getPosts = (req, res) => {
 
 const createPost = async (req, res) => {
     const {content, title } = req.body
-    if (!content) res.status(400).send({message: 'content no provided'})
-    if (!title) res.status(400).send({message: 'title no provided'})
-
     const file = req.file
-    const image_url =  await  awsService.uploadFile(file)
+
+    if (!content) return res.status(400).send({message: 'content no provided'})
+    if (!title) return res.status(400).send({message: 'title no provided'})
+    if (!file) return res.status(400).send({message: 'post image no provided'})
+    
+    const image_url =  await  awsService.uploadFileAws(file)
 
     const post = new Post()
     post.content = content
@@ -22,9 +24,9 @@ const createPost = async (req, res) => {
 
     post.save((err)=> {
         if(err) res.status(500).send({message: 'Error creating post'})
+        
         res.status(201).send({message: "post created"})
     })
-    
 }
 
 module.exports = {
