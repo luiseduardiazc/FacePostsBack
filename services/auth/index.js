@@ -1,16 +1,15 @@
-'use strict'
-const jwt = require('jsonwebtoken')
-const config = require('../../config')
+'use strict';
+const jwt = require('jsonwebtoken');
+const config = require('../../config');
 
 const createToken = (user) => {
+  const token = jwt.sign({
+    id: user._id
+  }, config.server.SECRET_KEY, { expiresIn: '1h' });
 
-   const token =  jwt.sign({
-        id: user._id
-      }, config.server.SECRET_KEY , { expiresIn: '1h' });
-
-    return token
-}
+  return token;
+};
 
 module.exports = {
-    createToken
-}
+  createToken
+};

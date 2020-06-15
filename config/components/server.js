@@ -1,6 +1,8 @@
-const config = {
-    PORT : process.env.SERVER_PORT,
-    SECRET_KEY: process.env.SECRET_KEY
-}
+'use strict';
 
-module.exports = config
+const config = {
+  PORT: process.env.SERVER_PORT,
+  SECRET_KEY: process.env.SECRET_KEY
+};
+
+module.exports = config;
