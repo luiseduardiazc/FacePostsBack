@@ -14,5 +14,6 @@ router.get('/', middleware.verifyToken, postsController.getPosts);
 router.get('/filters', postsController.filterPosts);
 router.post('/', middleware.verifyToken, upload.single('file'), postsController.createPost);
 router.delete('/', middleware.verifyToken, postsController.deletePost);
+router.put('/', middleware.verifyToken, postsController.updatePost);
 
 module.exports = router;

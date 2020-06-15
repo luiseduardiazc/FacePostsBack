@@ -3,6 +3,8 @@ const config = require('../config');
 
 const mongoose = require('mongoose');
 
+mongoose.set('useFindAndModify', false);
+
 // Connect to DB
 
 const dbSettings = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true };
