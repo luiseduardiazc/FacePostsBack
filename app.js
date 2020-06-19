@@ -15,7 +15,7 @@ app.use(cors());
 app.options('*', cors());
 
 app.use('/', (req, res) => {
-res.status(200).send({message: 'Wellcome to Face Posts Api'})
+res.status(200).send({message: 'Welcome to Face Posts Api'})
 })
 
 app.use('/api/auth', auth);
