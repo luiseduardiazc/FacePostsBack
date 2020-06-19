@@ -15,7 +15,7 @@ const singIn = async (req, res) => {
 
   const token = serviceAuth.createToken(user);
 
-  res.status(201).send({
+  res.status(200).send({
     auth: true,
     token
   });

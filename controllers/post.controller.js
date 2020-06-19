@@ -8,9 +8,10 @@ const userService = require('../services/user');
 const getPosts = async (req, res) => {
   const { page, pagination } = getPagination(req);
 
+  
   const postService = new PostPagination(page, pagination);
 
-  const query = { user: req.userId };
+  const query = {user: req.userId };
   const result = await postService.getAll(query);
   res.status(200).send({ data: result });
 };
@@ -101,7 +102,7 @@ const getPagination = (req) => {
 const getFilters = async (req, user) => {
   const filters = {};
 
-  const { title, content } = req.body;
+  const { title, content} = req.body;
 
   if (title) filters.title = title;
   if (content) filters.content = content;
