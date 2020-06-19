@@ -10,10 +10,10 @@ FacePost uses a number of open source projects to work properly:
 
 ### Installation
 
-Dillinger requires [Node.js](https://nodejs.org/) v10+ to run.
+FacePost requires [Node.js](https://nodejs.org/) v10+ to run.
 
 Environment variables
-* Create .env file in the root project with the following environment variables
+* Create .env file on the root of the project with the following environment variables
 ```sh
 # server config
 
@@ -122,20 +122,6 @@ Connection: keep-alive
 }
 ```
 - Manage pagination http://0.0.0.0:3000/api/posts?page=1&pagination=20
-
-
-
-### Request
-Create post 
-`POST api/posts`
-
-##### Required Fields
-- content
-- title
-- file   Image to be upload to Aws S3 use
-
-##### Headers
-` authorization: Basic <Access-Token>`
 
 
 ### Request
