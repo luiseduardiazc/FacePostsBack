@@ -16,7 +16,7 @@ const getPosts = async (req, res) => {
 };
 
 const filterPosts = async (req, res) => {
-  if (!req.body.email) return res.status(400).send({ message: "email user doesn't provided" });
+  if (!req.body.email) return res.status(422).send({ message: "email user doesn't provided" });
 
   const user = await userService.getUser({ email: req.body.email });
 
@@ -35,9 +35,9 @@ const createPost = async (req, res) => {
   const { content, title } = req.body;
   const file = req.file;
 
-  if (!content) return res.status(400).send({ message: "content doesn't provided" });
-  if (!title) return res.status(400).send({ message: "title doesn't provided" });
-  if (!file) return res.status(400).send({ message: "post image doesn't provided" });
+  if (!content) return res.status(422).send({ message: "content doesn't provided" });
+  if (!title) return res.status(422).send({ message: "title doesn't provided" });
+  if (!file) return res.status(422).send({ message: "post image doesn't provided" });
 
   const imageUrl = await awsService.uploadFileAws(file);
 
@@ -48,7 +48,7 @@ const createPost = async (req, res) => {
   post.image_url = imageUrl;
 
   post.save((err) => {
-    if (err) res.status(500).send({ message: 'Error creating post' });
+    if (err) res.status(500).send({ message: 'Server error creating post' });
 
     res.status(201).send({ message: 'post created' });
   });
@@ -59,7 +59,7 @@ const updatePost = async (req, res) => {
 
   const postId = req.body.postId;
 
-  if (!postId) return res.status(400).send({ message: "postId doesn't provided" });
+  if (!postId) return res.status(422).send({ message: "postId doesn't provided" });
 
   if (req.body.title) updates.title = req.body.title;
   if (req.body.content) updates.content = req.body.content;
@@ -68,14 +68,14 @@ const updatePost = async (req, res) => {
   try {
     result = await Post.findOneAndUpdate({ _id: postId, user: req.userId }, updates);
   } catch (error) {
-    res.status(400).send({ message: 'Nothing updated' });
+    res.status(304).send({ message: 'Nothing updated' });
   }
   res.status(201).send({ message: result });
 };
 
 const deletePost = async (req, res) => {
   const { postId } = req.body;
-  if (!postId) return res.status(400).send({ message: 'postId property no provided' });
+  if (!postId) return res.status(422).send({ message: 'postId property no provided' });
 
   try {
     await Post.findByIdAndDelete({ _id: postId, user: req.userId });
